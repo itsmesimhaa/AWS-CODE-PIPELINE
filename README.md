@@ -86,10 +86,10 @@ In this final step, we'll trigger the CI process by making a change to our GitHu
 
   - Remove the old deployments in the code deploy agent directory:
     ```bash
-  - sudo rm -rf /opt/codedeploy-agent/deployment-root/*
-  - sudo service codedeploy-agent restart or sudo systemctl restart codedeploy-agent.service
-  - tail -f /var/log/aws/codedeploy-agent/codedeploy-agent.log # monitor logs
-  - chmod +x /opt/codedeploy-agent/deployment-root/*/deployment-archive/scripts/*.sh # check the execution permissions
+    sudo rm -rf /opt/codedeploy-agent/deployment-root/*
+    sudo service codedeploy-agent restart or sudo systemctl restart codedeploy-agent.service
+    tail -f /var/log/aws/codedeploy-agent/codedeploy-agent.log # monitor logs
+    chmod +x /opt/codedeploy-agent/deployment-root/*/deployment-archive/scripts/*.sh # check the execution permissions
 
 
 ## code deploy agent installation if not installed while creating codedeploy application group
