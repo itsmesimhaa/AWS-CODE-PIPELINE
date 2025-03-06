@@ -57,9 +57,7 @@ In this final step, we'll trigger the CI process by making a change to our GitHu
 - You should see the pipeline automatically kick off as soon as it detects the changes in your repository.
 - Sit back and relax while AWS CodePipeline takes care of the rest. It will fetch the latest code, trigger the build process with AWS CodeBuild, and deploy the application if you configured the deployment stage.
 
-## Trobleshooitng and problems might face during the execution.
-
-## Roles:
+## Issues might face during the execution.
 
 ## Make sure the role attached to each services that is "code build", code deploy", "code pipeline" have proper permissions should looks like this below:
   - role for codebuild service:
