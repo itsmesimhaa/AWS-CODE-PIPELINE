@@ -56,3 +56,34 @@ In this final step, we'll trigger the CI process by making a change to our GitHu
 - Head over to the AWS CodePipeline console and navigate to your pipeline.
 - You should see the pipeline automatically kick off as soon as it detects the changes in your repository.
 - Sit back and relax while AWS CodePipeline takes care of the rest. It will fetch the latest code, trigger the build process with AWS CodeBuild, and deploy the application if you configured the deployment stage.
+
+## Trobleshooitng and problems might face during the execution.
+
+## Roles:
+
+## Make sure the role attached to each services that is "code build", code deploy", "code pipeline" have proper permissions should looks like this below:
+  - role for codebuild service:
+    - s3 put object access as the build artifacts are stored in S3.
+    - Cloudwatch logs access as we need events to track down the stages
+    - code build access, code pipeline access (optional if requried)
+    - aws secrets manager read and write access because the github credentials are stored here for changes to fetch it needs secrets to manage the repo changes.
+    - ssm parameter store access read where we have stored our env variables key pairs so it needs to extarct values while building the image.
+
+  - role for codedeploy service:
+    - AWS codedeploy role
+    - s3 access for saving artifacts
+
+  - role for codepipeline service:
+    - create a new one aws will create a role with custom policies attached
+
+## Troubleshoot errors in deploy stage.
+
+## Scripts folder error occurs when writing the appsec.yml we give start_container and stop_container.sh locations if the location path is not provided properly it will throw errors on script folder not found
+## Here one more error can be seen is even after creating a folder or correcting the location path of the scripts the changes are not took effectively:
+## sometimes the pipeline throws the same error everytime because there is something called old revisions the codedeploy agent in the server is not effectivley updating the github repo changes into the codedeploy root directory thus showing errors even after updating the github repo with proper configurations.
+## Solutions:
+    - Remove the old deployments in the code deploy agent directory:
+    - sudo rm -rf /opt/codedeploy-agent/deployment-root/*
+    - sudo service codedeploy-agent restart or sudo systemctl restart codedeploy-agent.service
+    - tail -f /var/log/aws/codedeploy-agent/codedeploy-agent.log # monitor logs
+    - chmod +x /opt/codedeploy-agent/deployment-root/*/deployment-archive/scripts/*.sh # check the execution permissions
