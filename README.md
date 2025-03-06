@@ -91,14 +91,13 @@ In this final step, we'll trigger the CI process by making a change to our GitHu
   - chmod +x /opt/codedeploy-agent/deployment-root/*/deployment-archive/scripts/*.sh # check the execution permissions
 
 ## code deploy agent installation if not installed while creating codedeploy application group
-///
-    sudo apt update -y
-    sudo apt install ruby wget -y
-    cd /home/ubuntu
-    wget https://aws-codedeploy-us-east-1.s3.us-east-1.amazonaws.com/latest/install
-    chmod +x ./install
-    sudo ./install auto
-    sudo systemctl start codedeploy-agent
-    sudo systemctl enable codedeploy-agent
-    sudo systemctl status codedeploy-agent
-///
+```bash
+sudo apt update -y
+sudo apt install ruby wget -y
+cd /home/ubuntu
+wget https://aws-codedeploy-us-east-1.s3.us-east-1.amazonaws.com/latest/install
+chmod +x ./install
+sudo ./install auto
+sudo systemctl start codedeploy-agent
+sudo systemctl enable codedeploy-agent
+sudo systemctl status codedeploy-agent
