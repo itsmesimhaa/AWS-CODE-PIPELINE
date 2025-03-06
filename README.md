@@ -82,10 +82,23 @@ In this final step, we'll trigger the CI process by making a change to our GitHu
    Here one more error can be seen is even after creating a folder or correcting the location path of the scripts the changes are not took effectively:
    sometimes the pipeline throws the same error everytime because there is something called old revisions the codedeploy agent in the server is not effectivley updating the github repo changes into the codedeploy root directory thus showing errors even after updating the github repo with proper configurations.
 
-   ## Solutions:
+## Solutions:
 
-    - Remove the old deployments in the code deploy agent directory:
-    - sudo rm -rf /opt/codedeploy-agent/deployment-root/*
-    - sudo service codedeploy-agent restart or sudo systemctl restart codedeploy-agent.service
-    - tail -f /var/log/aws/codedeploy-agent/codedeploy-agent.log # monitor logs
-    - chmod +x /opt/codedeploy-agent/deployment-root/*/deployment-archive/scripts/*.sh # check the execution permissions
+  - Remove the old deployments in the code deploy agent directory:
+  - sudo rm -rf /opt/codedeploy-agent/deployment-root/*
+  - sudo service codedeploy-agent restart or sudo systemctl restart codedeploy-agent.service
+  - tail -f /var/log/aws/codedeploy-agent/codedeploy-agent.log # monitor logs
+  - chmod +x /opt/codedeploy-agent/deployment-root/*/deployment-archive/scripts/*.sh # check the execution permissions
+
+## code deploy agent installation if not installed while creating codedeploy application group
+'''
+    sudo apt update -y
+    sudo apt install ruby wget -y
+    cd /home/ubuntu
+    wget https://aws-codedeploy-us-east-1.s3.us-east-1.amazonaws.com/latest/install
+    chmod +x ./install
+    sudo ./install auto
+    sudo systemctl start codedeploy-agent
+    sudo systemctl enable codedeploy-agent
+    sudo systemctl status codedeploy-agent
+'''
