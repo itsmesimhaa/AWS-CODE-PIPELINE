@@ -78,10 +78,12 @@ In this final step, we'll trigger the CI process by making a change to our GitHu
 
 ## Troubleshoot errors in deploy stage.
 
-## Scripts folder error occurs when writing the appsec.yml we give start_container and stop_container.sh locations if the location path is not provided properly it will throw errors on script folder not found
-## Here one more error can be seen is even after creating a folder or correcting the location path of the scripts the changes are not took effectively:
-## sometimes the pipeline throws the same error everytime because there is something called old revisions the codedeploy agent in the server is not effectivley updating the github repo changes into the codedeploy root directory thus showing errors even after updating the github repo with proper configurations.
-## Solutions:
+   Scripts folder error occurs when writing the appsec.yml we give start_container and stop_container.sh locations if the location path is not provided properly it will throw errors on script folder not found
+   Here one more error can be seen is even after creating a folder or correcting the location path of the scripts the changes are not took effectively:
+   sometimes the pipeline throws the same error everytime because there is something called old revisions the codedeploy agent in the server is not effectivley updating the github repo changes into the codedeploy root directory thus showing errors even after updating the github repo with proper configurations.
+
+   ## Solutions:
+
     - Remove the old deployments in the code deploy agent directory:
     - sudo rm -rf /opt/codedeploy-agent/deployment-root/*
     - sudo service codedeploy-agent restart or sudo systemctl restart codedeploy-agent.service
